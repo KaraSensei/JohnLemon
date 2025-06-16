@@ -9,18 +9,20 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Vector3 movement;
     private Quaternion targetRotation = Quaternion.identity;
+    AudioSource m_AudioSource;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        m_AudioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
     {
         // 1) Читаем ввод
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
         // 2) Вектор движения + нормализация
         movement = new Vector3(horizontal, 0f, vertical).normalized;
@@ -40,6 +42,14 @@ public class PlayerMovement : MonoBehaviour
                 0f
 );
             targetRotation = Quaternion.LookRotation(newDir);
+        }
+        if (isWalking)
+        {
+            if (!m_AudioSource.isPlaying) m_AudioSource.Play(); // Запускаем звук шагов, если он не играет
+        }
+        else
+        {
+            m_AudioSource.Stop(); // Останавливаем звук шагов, если игрок не движется
         }
     }
     void OnAnimatorMove()

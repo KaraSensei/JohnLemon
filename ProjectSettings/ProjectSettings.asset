@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: UnitySummerCourse
+  companyName: AnimoSchool
+  productName: "\u0414\u0436\u043E\u043D \u041B\u0438\u043C\u043E\u043D \u0441\u0443\u043F\u0435\u0440\u0438\u0433\u0440\u0430"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -762,7 +762,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: UnitySummerCourse
-  metroPackageVersion: 
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -770,7 +770,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: UnitySummerCourse
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: UnitySummerCourse
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

@@ -13,6 +13,10 @@ public class GameEnding : MonoBehaviour // Класс для управления концом игры, нас
     bool m_IsPlayerAtExit; // Флаг: находится ли игрок у выхода
     float m_Timer; // Таймер для отслеживания времени с момента окончания игры
 
+    public AudioSource exitAudio; // Аудиоисточники для воспроизведения звуков выхода и пойманного игрока
+    public AudioSource caughtAudio; // Аудиоисточники для воспроизведения звуков выхода и пойманного игрока
+    bool m_HasAudioPlayed; // Флаг для отслеживания, было ли воспроизведено аудио
+
     void OnTriggerEnter(Collider other) // Вызывается, когда объект входит в триггер-коллайдер
     {
         if (other.gameObject == player) // Если вошёл игрок
@@ -22,13 +26,19 @@ public class GameEnding : MonoBehaviour // Класс для управления концом игры, нас
     void Update() // Вызывается каждый кадр
     {
         if (m_IsPlayerAtExit) // Если игрок у выхода
-            EndLevel(exitBackgroundImageCanvasGroup, false); // Запускаем завершение уровня (выход)
+            EndLevel(exitBackgroundImageCanvasGroup, false, exitAudio); // Запускаем завершение уровня (выход)
         else if (m_IsPlayerCaught) // Если игрок пойман
-            EndLevel(caughtBackgroundImageCanvasGroup, true); // Запускаем завершение уровня (поражение)
+            EndLevel(caughtBackgroundImageCanvasGroup, true, caughtAudio); // Запускаем завершение уровня (поражение)
     }
 
-    void EndLevel(CanvasGroup imageCanvasGroup, bool doRestart) // Метод завершения уровня
+    void EndLevel(CanvasGroup imageCanvasGroup, bool doRestart, AudioSource audio) // Метод завершения уровня
     {
+        if (!m_HasAudioPlayed)
+        {
+            audio.Play(); // Воспроизводим аудио (выход или пойман)
+            m_HasAudioPlayed = true; // Устанавливаем флаг, что аудио уже воспроизведено
+        }
+
         m_Timer += Time.deltaTime; // Увеличиваем таймер на время, прошедшее с прошлого кадра
         imageCanvasGroup.alpha = m_Timer / fadeDuration; // Плавно увеличиваем прозрачность изображения выхода
 
